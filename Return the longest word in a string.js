@@ -11,11 +11,11 @@ function findLongestWord(str) {
 			wordLength = str[i].length; // set wordLength to equal length of current word
 			longestWord = str[i]; // set longestWord to current word
 		}
- 	};
+ 	}
 
 	debug(longestWord);
  	return longestWord;											
  	
- };
+ }
 
 findLongestWord("The quick brown fox jumped over the lazy dog.");
