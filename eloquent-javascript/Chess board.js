@@ -22,9 +22,9 @@ var size = 8
 for (var row = 0; row < size; row++) {
 	for (var column = 0; column < size; column++) {
 		if ((row + column) % 2 == 0) 
-		board += " ";	
-	else 
-		board += "#";
+			board += " ";	
+		else 
+			board += "#";
 	}
 	board += "\n";
 }
