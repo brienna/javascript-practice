@@ -15,8 +15,8 @@ countBs = function(str) {
 countChar = function(str, charToBeCounted) {
 	total = 0;
 	for (i = 0; i < str.length; i++)
-	if (str.charAt(i) == charToBeCounted) 
-		total += 1;
+		if (str.charAt(i) == charToBeCounted) 
+			total += 1;
 	return total;
 }
 
