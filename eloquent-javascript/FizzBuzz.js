@@ -6,14 +6,14 @@ to print "FizzBuzz", for numbers that are divisible by both 3 and 5 (and still p
 "Buzz" for numbers divisible by only one of those).
 */
 
-for (num = 1; num <= 100; num++) {
-	if (num % 3 == 0 && num % 5 == 0) {
+for (var num = 1; num <= 100; num++) {
+	if (num % 3 === 0 && num % 5 === 0) {
 		debug("FizzBuzz");
 	}
-	else if (num % 3 == 0) {
+	else if (num % 3 === 0) {
 		debug("Fizz");
 	}
-	else if (num % 5 == 0) {
+	else if (num % 5 === 0) {
 		debug("Buzz");
 	}
 	else {
