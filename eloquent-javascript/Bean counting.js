@@ -8,17 +8,18 @@ takes a second argument that indicates the character that is to be counted
 use of this new function.
 */
 
-countBs = function(str) {
+var countBs = function(str) {
 	return countChar(str, "B");
-}
+};
 
-countChar = function(str, charToBeCounted) {
-	total = 0;
-	for (i = 0; i < str.length; i++)
+var countChar = function(str, charToBeCounted) {
+	var total = 0;
+	
+	for (var i = 0; i < str.length; i++)
 		if (str.charAt(i) == charToBeCounted) 
 			total += 1;
 	return total;
-}
+};
 
 debug(countBs("BBC"));
 debug(countChar("kakkerlak", "k"));
