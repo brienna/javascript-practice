@@ -16,16 +16,17 @@ When you have a program that generates this pattern, define a variable size = 8 
 so that it works for any size, outputting a grid of the given width and height.
 */
 
-var board = ""
-var size = 8
+var board = "";
+var size = 8;
 
 for (var row = 0; row < size; row++) {
 	for (var column = 0; column < size; column++) {
-		if ((row + column) % 2 == 0) 
+		if ((row + column) % 2 === 0) 
 			board += " ";	
 		else 
 			board += "#";
 	}
+	
 	board += "\n";
 }
 
