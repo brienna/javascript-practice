@@ -16,7 +16,7 @@ Can you think of a way to fix this?
 */
 
 function isEven(number) {
-  if (number == 0)
+  if (number === 0)
     return true;
   else if (number == 1)
     return false;
