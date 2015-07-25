@@ -1,0 +1,118 @@
+<!-- Write a function buildTable that, given an array of objects that all have the same set of properties, builds up a DOM structure 
+representing a table. The table should have a header row with the property names wrapped in <th> elements and should have one 
+subsequent row per object in the array, with its property values in <td> elements.
+
+Once you have the basics working, right-align cells containing numbers by setting their style.textAlign property to "right". -->
+
+<!DOCTYPE html>
+<style>
+  /* given styling to define a cleaner look for the table */
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+</style>
+
+<body>
+<script>
+	// given array of objects that all have the same set of properties
+	var MOUNTAINS = [
+	  {name: "Kilimanjaro", height: 5895, country: "Tanzania"},
+	  {name: "Everest", height: 8848, country: "Nepal"},
+	  {name: "Mount Fuji", height: 3776, country: "Japan"},
+	  {name: "Mont Blanc", height: 4808, country: "Italy/France"},
+	  {name: "Vaalserberg", height: 323, country: "Netherlands"},
+	  {name: "Denali", height: 6168, country: "United States"},
+	  {name: "Popocatepetl", height: 5465, country: "Mexico"}
+	];
+
+	function buildTable(arrayOfObjects) {
+	   var table = document.createElement("table"); // creates table node
+
+	   // top row
+	   var firstRow = document.createElement("tr"); // creates first row node
+	   table.appendChild(firstRow); // adds first row to table
+	   var keys = Object.keys(arrayOfObjects[0]); // creates array of keys
+	   for (var i = 0; i < keys.length; i++) { // loops over array of keys
+	      var heading = document.createTextNode(keys[i]); // creates text node containing current key
+	      var firstRowCell = document.createElement("th"); // creates cell node
+	      firstRowCell.appendChild(heading); // adds text to cell
+	      firstRow.appendChild(firstRowCell); // adds cell to first row
+	   }
+
+	   // data rows
+	   for (var ii = 0; ii < arrayOfObjects.length; ii++) { // loops over array of objects
+	      var row = document.createElement("tr"); // creates row node
+	      table.appendChild(row); // adds row to table
+	      for (var iii = 0; iii < keys.length; iii++) { // loops over an object's keys
+	      	var data = arrayOfObjects[ii][keys[iii]]; // holds onto current key's value
+	        var dataNode = document.createTextNode(data); // creates text node containing current key's value
+	        var cell = document.createElement("td"); // creates cell node
+			cell.appendChild(dataNode); // adds text to cell
+	        row.appendChild(cell); // adds cell to row
+	       
+	        if (typeof data == "number") { 
+	        	cell.style.textAlign = "right"; 
+	        }
+	      }
+	   }
+
+	   return table;
+	}
+
+	document.body.appendChild(buildTable(MOUNTAINS)); 
+</script>
+</body>
+
+
+<!-- Eloquent JavaScript answer: -->
+<!doctype html>
+<style>
+  /* Defines a cleaner look for tables */
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+</style>
+
+<body>
+<script>
+   var MOUNTAINS = [
+     {name: "Kilimanjaro", height: 5895, country: "Tanzania"},
+     {name: "Everest", height: 8848, country: "Nepal"},
+     {name: "Mount Fuji", height: 3776, country: "Japan"},
+     {name: "Mont Blanc", height: 4808, country: "Italy/France"},
+     {name: "Vaalserberg", height: 323, country: "Netherlands"},
+     {name: "Denali", height: 6168, country: "United States"},
+     {name: "Popocatepetl", height: 5465, country: "Mexico"}
+   ];
+
+  function buildTable(data) {
+    var table = document.createElement("table");
+  
+    var fields = Object.keys(data[0]);
+    var headRow = document.createElement("tr");
+    fields.forEach(function(field) {
+      var headCell = document.createElement("th");
+      headCell.textContent = field;
+      headRow.appendChild(headCell);
+    });
+    table.appendChild(headRow);
+
+    data.forEach(function(object) {
+      var row = document.createElement("tr");
+      fields.forEach(function(field) {
+        var cell = document.createElement("td");
+        cell.textContent = object[field];
+        if (typeof object[field] == "number")
+          cell.style.textAlign = "right";
+        row.appendChild(cell);
+      });
+      table.appendChild(row);
+    });
+
+    return table;
+  }
+
+  document.body.appendChild(buildTable(MOUNTAINS));
+</script>
+</body>
+
