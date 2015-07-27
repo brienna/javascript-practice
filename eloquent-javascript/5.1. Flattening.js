@@ -7,7 +7,7 @@ var arrays = [[1, 2, 3], [4, 5], [6]];
 
 var array = arrays.reduce(function(previousArray, currentArray) { // combines array elements, starting from the left
                 return previousArray.concat(currentArray); // by concatenating current element to previous element
-            }) 
+            });
 
 debug(array); // prints [1, 2, 3, 4, 5, 6]
 
