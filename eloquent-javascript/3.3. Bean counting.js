@@ -1,4 +1,5 @@
-/*
+/* 3.3. Bean counting
+
 Write a function countBs that takes a string as its only argument and returns 
 a number that indicates how many uppercase “B” characters are in the string.
 
