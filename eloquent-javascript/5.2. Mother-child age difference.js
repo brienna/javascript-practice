@@ -306,3 +306,46 @@ debug(sumOfDifferences/sets); // prints 31.2
 
 
 // My answer after incorporating Eloquent JavaScript suggestions: 
+function average(array) { // given
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var byName = {}; // given
+ancestry.forEach(function(person) {
+  byName[person.name] = person;
+});
+
+var differences = ancestry.map(function(child) { 
+  for (var name in byName) // loops over potential mothers in byName object
+    if (child.mother == name) // if current child's mother is the same person
+      return child.born - byName[name].born; // return age difference
+  return null; // if no mother is known
+});
+
+// removes null elements
+differences = differences.filter(function(difference) { 
+  return difference !== null; 
+});
+  
+debug(average(differences)); // prints 31.2
+
+
+// Eloquent JavaScript answer: 
+function average(array) {
+  function plus(a, b) { return a + b; }
+  return array.reduce(plus) / array.length;
+}
+
+var byName = {};
+ancestry.forEach(function(person) {
+  byName[person.name] = person;
+});
+
+var differences = ancestry.filter(function(person) {
+  return byName[person.mother] != null;
+}).map(function(person) {
+  return person.born - byName[person.mother].born; 
+});
+
+console.log(average(differences)); // prints 31.2
