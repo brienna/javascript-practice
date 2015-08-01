@@ -11,18 +11,18 @@ it will not look at the values after that.
 Write two functions, every and some, that behave like these methods, except that they take the 
 array as their first argument rather than being a method. */
 
-function every(array, action) {
+function every(array, predicate) {
     for (var i = 0; i < array.length; i++) {
-        if (!action(array[i])) { // if predicate returns false for current element
+        if (!predicate(array[i])) { // if predicate returns false for current element
             return false;
         }  
     }
     return true; // if predicate is true for all elements
 }
 
-function some(array, action) {
+function some(array, predicate) {
     for (var i = 0; i < array.length; i++) {
-        if (action(array[i])) { // if predicate returns true for current element
+        if (predicate(array[i])) { // if predicate returns true for current element
             return true;
         }
     }
