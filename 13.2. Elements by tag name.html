@@ -1,0 +1,67 @@
+<!-- 13.2. Elements by tag name
+
+The getElementsByTagName method returns all child elements with a given tag name. 
+Implement your own version of it as a regular nonmethod function that takes a node 
+and a string (the tag name) as arguments and returns an array containing all 
+descendant element nodes with the given tag name.
+
+Hints: The solution is most easily expressed with a recursive function
+
+You could call byTagname itself recursively, concatenating the resulting arrays to 
+produce the output. For a more efficient approach, define an inner function that 
+calls itself recursively and that has access to an array variable defined in the 
+outer function to which it can add the matching elements it finds. Don’t forget to 
+call the inner function once from the outer function. -->
+
+<h1>Heading with a <span>span</span> element.</h1><p>A paragraph with 
+<span>one</span>, <span>two</span> spans.</p>
+
+<script>
+  function byTagName(node, tagName) {
+    tagName = tagName.toUpperCase();
+    var hasTagName = [];
+
+    checkChildNode(node.firstChild); // check node's first child
+    return hasTagName; 
+    
+    function checkChildNode(node) { 
+      while (node) { // while node exists
+        if (node.nodeType == 1 && node.tagName) { // if node is an element
+          if (node.tagName === tagName) { // if node's tag name matches given tagName
+            hasTagName.push(node); // add node to hasTagName array
+          }
+          checkChildNode(node.firstChild); // check node's first child recursively
+        }
+        node = node.nextSibling; // reassign node to its next sibling
+      }
+    } 
+  }
+  
+  console.log(byTagName(document.body, "h1").length); // prints 1
+  console.log(byTagName(document.body, "span").length); // prints 3
+  var para = document.querySelector("p");
+  console.log(byTagName(para, "span").length); // prints 2
+</script>
+
+
+<!-- Eloquent JavaScript answer: -->
+<script>
+function byTagName(node, tagName) {
+    var found = [];
+    tagName = tagName.toUpperCase();
+
+    function explore(node) {
+      for (var i = 0; i < node.childNodes.length; i++) {
+        var child = node.childNodes[i];
+        if (child.nodeType == document.ELEMENT_NODE) {
+          if (child.nodeName == tagName)
+            found.push(child);
+          explore(child);
+        }
+      }
+    }
+
+    explore(node);
+    return found;
+  }
+</script>
