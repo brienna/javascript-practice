@@ -1,0 +1,79 @@
+<!-- 13.3. The cat's hat
+
+<p style="text-align: center">
+  <img src="img/cat.png" style="position: relative">
+</p>
+<script>
+  var cat = document.querySelector("img");
+  var angle = 0, lastTime = null;
+  function animate(time) {
+    if (lastTime != null)
+      angle += (time - lastTime) * 0.001;
+    lastTime = time;
+    cat.style.top = (Math.sin(angle) * 20) + "px";
+    cat.style.left = (Math.cos(angle) * 200) + "px";
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+</script>
+
+Extend the cat animation defined above so that both the cat and his hat orbit at opposite sides of the ellipse.
+
+Or make the hat circle around the cat. Or alter the animation in some other interesting way.
+
+To make positioning multiple objects easier, it is probably a good idea to switch to absolute positioning. 
+This means that top and left are counted relative to the top left of the document. To avoid using negative
+coordinates, you can simply add a fixed number of pixels to the position values. -->
+
+<img src="http://eloquentjavascript.net/img/cat.png" id="cat" style="position: absolute">
+<img src="http://eloquentjavascript.net/img/hat.png" id="hat" style="position: absolute">
+
+<!-- Where both the cat and his hat orbit at opposite sides of the ellipse -->
+<script>
+  var cat = document.querySelector("#cat"),
+      hat = document.querySelector("#hat"),
+      angleCat = 0, 
+      angleHat = Math.PI, // sets hat opposite cat
+      lastTime = null;
+
+  function animate(time) {
+    if (lastTime != null) {
+      angleCat += (time - lastTime) * 0.001;
+      angleHat += (time - lastTime) * 0.001;
+    }
+    lastTime = time; 
+
+    cat.style.top = (200 + (Math.sin(angleCat) * 200)) + "px";
+    cat.style.left = (400 + (Math.cos(angleCat) * 400)) + "px"; 
+    hat.style.top = (200 + (Math.sin(angleHat) * 200)) + "px"; 
+    hat.style.left = (400 + (Math.cos(angleHat) * 400)) + "px"; 
+
+    requestAnimationFrame(animate); // continues animation
+  }
+
+  requestAnimationFrame(animate); // begins animation
+</script> 
+
+
+<!-- Eloquent JavaScript answer: -->
+<script>
+  var cat = document.querySelector("#cat");
+  var hat = document.querySelector("#hat");
+
+  var angle = 0, lastTime = null;
+  function animate(time) {
+    if (lastTime != null)
+      angle += (time - lastTime) * 0.0015;
+    lastTime = time;
+
+    cat.style.top = (Math.sin(angle) * 50 + 80) + "px";
+    cat.style.left = (Math.cos(angle) * 200 + 230) + "px";
+    // By adding π to the angle, the hat ends up half a circle ahead of the cat
+    var hatAngle = angle + Math.PI;
+    hat.style.top = (Math.sin(hatAngle) * 50 + 80) + "px";
+    hat.style.left = (Math.cos(hatAngle) * 200 + 230) + "px";
+
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+</script> 
