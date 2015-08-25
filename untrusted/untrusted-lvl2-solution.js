@@ -11,7 +11,7 @@ function startLevel(map) {
     map.placePlayer(7, 5);
 
     var maze = new ROT.Map.DividedMaze(map.getWidth(), map.getHeight());
-/* // commented out the block maze
+/*
     maze.create( function (x, y, mapValue) {
 
         // don't write maze over player
