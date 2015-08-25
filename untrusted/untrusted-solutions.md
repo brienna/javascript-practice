@@ -26,3 +26,17 @@ Comment out all the blocks:
 */
 ```
 
+###03 validationEngaged
+Change an existing `map.placeObject` function call within the first `for` loop, reducing the value of the first argument (the x-coordinate) by 2 to insert a gap for the player to pass through: 
+
+```javascript
+map.placeObject(map.getWidth() - 3, y, 'block');
+```
+
+###04 multiplicity
+Place a second exit right above player:
+
+```javascript
+map.placeObject(45, 20, 'exit');
+```
+
