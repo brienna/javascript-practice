@@ -32,7 +32,7 @@ function startLevel(map) {
     
     for (x = 5; x <= map.getWidth() - 5; x++) {
         map.placeObject(x, 3, 'block');
-        map.placeObject(x, map.getHeight() - 8, 'block'); // changed this statement to insert a gap
+        map.placeObject(x, map.getHeight() - 8, 'block'); // reduced 10 to 8 to insert a gap
     }
 
     map.placeObject(15, 12, 'computer');
