@@ -34,9 +34,16 @@ map.placeObject(map.getWidth() - 3, y, 'block');
 ```
 
 ###04 multiplicity
-Place a second exit right above player:
+Place a second exit right above the player:
 
 ```javascript
 map.placeObject(45, 20, 'exit');
+```
+
+###05 minesweeper
+Set the mines' color to black:
+
+```javascript
+map.setSquareColor(x, y, '#000');
 ```
 
