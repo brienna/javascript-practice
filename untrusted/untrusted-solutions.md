@@ -55,3 +55,19 @@ for (var i = 0; i < map.getWidth() - 5; i++) {
     	map.placeObject(i, 3, 'block');
     }
 ```
+
+###07 colors
+Set the function phone callback to change the player's color based on its current color:
+
+```javascript
+var player = map.getPlayer();
+    
+    if (player.getColor() == '#0f0') {
+    	player.setColor('#f00');
+    } else if (player.getColor() == '#f00') {
+    	player.setColor('ff0');
+    } else {
+    	player.setColor('0f0');
+    }
+```
+
