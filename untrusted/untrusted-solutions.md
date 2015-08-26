@@ -71,3 +71,11 @@ var player = map.getPlayer();
     }
 ```
 
+###08 intoTheWoods
+Set the function phone callback to generate a new forest:
+
+```javascript
+generateForest
+```
+
+
