@@ -47,3 +47,11 @@ Set the mines' color to black:
 map.setSquareColor(x, y, '#000');
 ```
 
+###06 drones101
+Prevent the drone from colliding with the player by separating the two with a row of blocks: 
+
+```javascript
+for (var i = 0; i < map.getWidth() - 5; i++) {
+    	map.placeObject(i, 3, 'block');
+    }
+```
