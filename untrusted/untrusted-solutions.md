@@ -65,9 +65,9 @@ var player = map.getPlayer();
     if (player.getColor() == '#0f0') {
     	player.setColor('#f00');
     } else if (player.getColor() == '#f00') {
-    	player.setColor('ff0');
+    	player.setColor('#ff0');
     } else {
-    	player.setColor('0f0');
+    	player.setColor('#0f0');
     }
 ```
 
