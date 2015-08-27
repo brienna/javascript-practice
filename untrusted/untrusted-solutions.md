@@ -52,8 +52,8 @@ Prevent the drone from colliding with the player by separating the two with a ro
 
 ```javascript
 for (var i = 0; i < map.getWidth() - 5; i++) {
-    	map.placeObject(i, 3, 'block');
-    }
+    map.placeObject(i, 3, 'block');
+}
 ```
 
 ###07 colors
@@ -62,13 +62,13 @@ Set the function phone callback to change the player's color based on its curren
 ```javascript
 var player = map.getPlayer();
     
-    if (player.getColor() == '#0f0') {
-    	player.setColor('#f00');
-    } else if (player.getColor() == '#f00') {
-    	player.setColor('#ff0');
-    } else {
-    	player.setColor('#0f0');
-    }
+if (player.getColor() == '#0f0') {
+	player.setColor('#f00');
+} else if (player.getColor() == '#f00') {
+	player.setColor('#ff0');
+} else {
+	player.setColor('#0f0');
+}
 ```
 
 ###08 intoTheWoods
@@ -77,5 +77,13 @@ Set the function phone callback to generate a new forest:
 ```javascript
 generateForest
 ```
+
+###09 fordingTheRiver
+Set the function phone callback to change the raft's direction from down to up:
+
+```javascript
+player.setPhoneCallback(function() {
+    	raftDirection = 'up';
+    });
 
 
