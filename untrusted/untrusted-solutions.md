@@ -84,6 +84,27 @@ Set the function phone callback to change the raft's direction from down to up:
 ```javascript
 player.setPhoneCallback(function() {
     	raftDirection = 'up';
-    });
+});
+```
 
+###10 ambush
+Change the behavior of each drone type to clear a path to the exit:
 
+attackDrone:
+```javascript
+moveToward(me, 'reinforcementDrone'); 
+```
+
+reinforcementDrone:
+```javascript
+me.move('right'); 
+```
+
+defenseDrone:
+```javascript
+if (me.getY() == 12) {
+    me.move('down');
+} else {
+    me.move('right');
+}
+```
