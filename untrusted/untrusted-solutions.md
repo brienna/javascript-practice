@@ -108,3 +108,14 @@ if (me.getY() == 12) {
     me.move('right');
 }
 ```
+
+###11 robot
+If the robot can move right, have it move right. Otherwise have it move down:
+
+```javascript
+if (me.canMove('right')) {
+    me.move('right');
+} else {
+    me.move('down');
+}
+```
