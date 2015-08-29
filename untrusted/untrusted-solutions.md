@@ -119,3 +119,19 @@ if (me.canMove('right')) {
     me.move('down');
 }
 ```
+
+###12 robotNav
+```javascript
+if (!me.canMove('up') && !me.canMove('right')) {
+    me.move('left');
+    map.placeObject(me.getX() + 1, me.getY(), 'block');
+    map.placeObject(me.getX() - 1, me.getY(), 'block');
+} else if (!me.canMove('down') && me.canMove('right')) {
+    me.move('right');
+} else if (me.canMove('down')) {
+    me.move('down');
+} else {
+    me.move('up');
+    map.placeObject(me.getX(), me.getY() + 1, 'block'); 
+}
+```
