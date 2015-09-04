@@ -1,3 +1,5 @@
+// Bonfire: Titlecase a sentence
+
 // Return a string with the first letter of each word capitalized.
 
 function titleCase(str) {
