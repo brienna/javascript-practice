@@ -1,4 +1,4 @@
-// Return the longest word in a string.
+// Bonfire: Find the longest word in a string. 
 
 function findLongestWord(str) {												
 
