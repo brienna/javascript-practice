@@ -1,37 +1,90 @@
 <!DOCTYPE html>
+<head>
+<style>
+
+	table {
+		width: 300px;
+		height: 300px;
+		border-collapse: collapse;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		position: relative;
+	} 
+
+	div {
+		position: absolute;
+		background: #999;
+		width: 100%;
+		height: 100%;
+	}
+
+	.button {
+		display: block;
+		width: 100%;
+		height: 50%;
+		text-align: center;
+		border: 1px solid black;
+		font-size: 6em;
+	}
+
+	.button:hover {
+		background: white;
+	}
+</style>
+</head>
+
 <body>
 <script>
+// create and append table node to body
+var table = document.createElement('table'); 
+document.body.appendChild(table); 
 
-var mySymbol = 'X'; // make this into a popup inquiry div later
-if (mySymbol == 'X') {
-	var computerSymbol = 'O';
-} else {
-	var computerSymbol = 'X';
+// QUERY PLAYER TO CHOOSE A SYMBOL
+// create and append query div to table
+var query = document.createElement('div'); 
+table.appendChild(query); 
+// create and append query buttons to query div
+var xButton = document.createElement('a');
+var oButton = document.createElement('a');
+query.appendChild(xButton);
+query.appendChild(oButton);
+xButton.className = 'button';
+oButton.className = 'button';
+x = document.createTextNode('X');
+o = document.createTextNode('O');
+xButton.appendChild(x);
+oButton.appendChild(o);
+
+var buttons = document.getElementsByClassName("button");
+  
+var mySymbol;
+var computerSymbol;
+function assignSymbol(event) {
+	mySymbol = event.target.firstChild.nodeValue;
+	if (mySymbol == 'X') {
+		computerSymbol = 'O';
+	} else {
+		computerSymbol = 'X';
+	}
+
+	query.style.display = 'none';
 }
 
-var table = document.createElement('table'); // creates table node
+for(var i=0;i<buttons.length;i++){
+    buttons[i].addEventListener('click', assignSymbol, false);
+}
 
-// table styling
-table.style.width  = '300px';
-table.style.height = '300px';
-table.style.border = '1px solid black';
-table.style.borderCollapse = 'collapse';
-table.style.textAlign = 'center';
-table.style.marginLeft = 'auto';
-table.style.marginRight = 'auto';
-
+// CONTINUE TABLE
 var row = null;
 var cell = null;
 var data = null;
-
 for (var x = 0; x < 3; x++) {
 	row = document.createElement('tr'); // creates row node
 	table.appendChild(row); // appends row to table
-
 	for (var y = 0; y < 3; y++) {
 		cell = document.createElement('td'); // creates cell node
 		row.appendChild(cell); // appends cell to row
-
 		// cell styling
 		cell.style.width = '33.33%';
 		cell.style.height= '33.3%';
@@ -39,10 +92,7 @@ for (var x = 0; x < 3; x++) {
 	}
 }
 
-document.body.appendChild(table); // appends table to document body
-
 table.addEventListener("click", myTurn);
-
 function myTurn(event) {
 	data = document.createTextNode(mySymbol); 
 	
@@ -51,7 +101,6 @@ function myTurn(event) {
 		computerTurn(); // at the end of my turn, the computer takes its turn
 	}
 }
-
 function computerTurn() { // artifical intelligence part
 	data = document.createTextNode(computerSymbol); 
 	
@@ -61,7 +110,6 @@ function computerTurn() { // artifical intelligence part
 	var rows = [[cells[0], cells[1], cells[2]], 
 				[cells[3], cells[4], cells[5]],
 				[cells[6], cells[7], cells[8]]];
-
 	/*
 	rows1 = rows.map(function(row) { 
 		return row.map(function(cell) {
@@ -72,7 +120,6 @@ function computerTurn() { // artifical intelligence part
 			}
 		});
 	}); */
-
 	// columns
 	var columns = [[rows[0][0], rows[1][0], rows[2][0]],
 					[rows[0][1], rows[1][1], rows[2][1]],
@@ -80,21 +127,16 @@ function computerTurn() { // artifical intelligence part
 	// diagonals
 	var diagonals = [[rows[0][0], rows[1][1], rows[2][2]],
 					[rows[0][2], rows[1][1], rows[2][0]]];
-
 	// defense
 	defense(rows, columns, diagonals);
-
 	function defense(rows, columns, diagonals) {
 		var tookTurn = 'no';
-
 		check(rows);
 		check(columns);
 		check(diagonals);
-
 		if (tookTurn == 'no') {
 			offense();
 		}
-
 		function check(elements) {
 			var count = 0; 
 			for (var element in elements) { // for row/column/diagonal in rows/columns/diagonals
@@ -117,13 +159,11 @@ function computerTurn() { // artifical intelligence part
 			}
 		}
 	}
-
 	function offense() {
 		
 		check(rows);
 		check(columns);
 		check(diagonals);
-
 		if (!cells[4].hasChildNodes()) {
 			cells[4].appendChild(data);
 		} else {
@@ -133,10 +173,7 @@ function computerTurn() { // artifical intelligence part
 			}
 			cells[num].appendChild(data);
 		}
-
 		function check(elements) {
-
-
 			var count = 0;
 			for (var element in elements) { // for row/column/diagonal in rows/columns/diagonals
 				for (var cell in elements[element]) { // for each cell
@@ -156,8 +193,6 @@ function computerTurn() { // artifical intelligence part
 			}
 		}
 	}
-
-
 </script>
 </body>
-
+</html>
