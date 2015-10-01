@@ -6,6 +6,7 @@
 		width: 300px;
 		height: 300px;
 		border-collapse: collapse;
+		border: 0px;
 		text-align: center;
 		margin-left: auto;
 		margin-right: auto;
@@ -14,23 +15,45 @@
 
 	div {
 		position: absolute;
-		background: #999;
+		background: pink;
 		width: 100%;
 		height: 100%;
+		opacity: 0.8;
+
 	}
 
 	.button {
 		display: inline-block;
-		width: 148px;
-		height: 100%;
-		text-align: center;
+		box-sizing: border-box;
+		opacity: 1;
+		background: black;
+		width: 33%;
+		height: 33%;
+		margin-top: 25%;
 		border: 1px solid black;
-		font-size: 6em;
+		text-align: center;
+		font-size: 2em;
+		line-height: 100%;
+		color: white;
+
+	}
+
+	#x {
+		margin-right: 10px;
+	}
+
+	#y {
+		margin-left: 5px;
 	}
 
 	.button:hover {
 		background: white;
 	}
+
+	td:hover {
+		background: pink;
+	}
+
 </style>
 </head>
 
@@ -40,9 +63,9 @@
 var table = document.createElement('table'); 
 document.body.appendChild(table); 
 
-// QUERY PLAYER TO CHOOSE A SYMBOL
-// create and append query div to table
-var query = document.createElement('div'); 
+// ASK PLAYER TO CHOOSE A SYMBOL:
+// create and append query div to body
+var query = document.createElement('div');
 table.appendChild(query); 
 // create and append query buttons to query div
 var xButton = document.createElement('a');
@@ -51,11 +74,13 @@ query.appendChild(xButton);
 query.appendChild(oButton);
 xButton.className = 'button';
 oButton.className = 'button';
+xButton.id = 'x';
+oButton.id = 'y';
+// create and append text to query buttons
 x = document.createTextNode('X');
 o = document.createTextNode('O');
 xButton.appendChild(x);
 oButton.appendChild(o);
-
 // bind query choice to have game show up with symbols assigned
 var buttons = document.getElementsByClassName("button");
   
