@@ -1,3 +1,5 @@
+<!-- CHANGE X AND O TO COLORS AFTER DONE WITH IT ALL -->
+
 <!DOCTYPE html>
 <head>
 <style>
@@ -6,19 +8,26 @@
 		width: 300px;
 		height: 300px;
 		border-collapse: collapse;
-		border: 0px;
 		text-align: center;
 		margin-left: auto;
 		margin-right: auto;
 		position: relative;
+		border: 0;
 	} 
+
+	td {
+		border: 1px solid black;
+		width: 33.33333%;
+		height: 33.33333%;
+	}
 
 	div {
 		position: absolute;
-		background: pink;
+		background: red;
 		width: 100%;
 		height: 100%;
 		opacity: 0.8;
+		border: 0;
 
 	}
 
@@ -35,7 +44,6 @@
 		font-size: 2em;
 		line-height: 100%;
 		color: white;
-
 	}
 
 	#x {
@@ -51,7 +59,7 @@
 	}
 
 	td:hover {
-		background: pink;
+		background: red;
 	}
 
 </style>
@@ -64,7 +72,7 @@ var table = document.createElement('table');
 document.body.appendChild(table); 
 
 // ASK PLAYER TO CHOOSE A SYMBOL:
-// create and append query div to body
+// create and append query div to table
 var query = document.createElement('div');
 table.appendChild(query); 
 // create and append query buttons to query div
@@ -77,13 +85,14 @@ oButton.className = 'button';
 xButton.id = 'x';
 oButton.id = 'y';
 // create and append text to query buttons
+var x = document.createElement('span');
+
 x = document.createTextNode('X');
 o = document.createTextNode('O');
 xButton.appendChild(x);
 oButton.appendChild(o);
 // bind query choice to have game show up with symbols assigned
 var buttons = document.getElementsByClassName("button");
-  
 var mySymbol;
 var computerSymbol;
 function assignSymbol(event) {
@@ -93,17 +102,11 @@ function assignSymbol(event) {
 	} else {
 		computerSymbol = 'X';
 	}
-
 	query.style.display = 'none';
 }
-
 for(var i=0;i<buttons.length;i++){
     buttons[i].addEventListener('click', assignSymbol, false);
 }
-
-
-
-
 
 
 // CONTINUE TABLE
@@ -115,24 +118,22 @@ for (var x = 0; x < 3; x++) {
 	table.appendChild(row); // appends row to table
 	for (var y = 0; y < 3; y++) {
 		cell = document.createElement('td'); // creates cell node
-		row.appendChild(cell); // appends cell to row
-		// cell styling
-		cell.style.width = '33.33%';
-		cell.style.height= '33.3%';
-		cell.style.border = '1px solid black';
+		row.appendChild(cell); // appends cell to row		
 	}
 }
 
+// WHEN I CLICK ON THE TABLE, MY TURN OCCURS
 table.addEventListener("click", myTurn);
 function myTurn(event) {
 	data = document.createTextNode(mySymbol); 
 	
 	if (!event.target.hasChildNodes()) {
 		event.target.appendChild(data);
+		event.target.style.background = 'black';
 		computerTurn(); // at the end of my turn, the computer takes its turn
 	}
 }
-function computerTurn() { // artifical intelligence part
+function computerTurn() { // artifical intelligence
 	data = document.createTextNode(computerSymbol); 
 	
 	// representations of data in each cell
