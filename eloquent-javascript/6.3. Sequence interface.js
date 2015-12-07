@@ -41,6 +41,28 @@ ArraySeq.prototype.next = function() {
 ArraySeq.prototype.current = function() {
   return this.array[this.index];
 };
+
+// RangeSeq is an object type for iterating over a range of integers.
+function RangeSeq(start, end) {
+  this.currentInt = start - 1;
+  this.to = end;
+}
+  
+// next() increments current num by 1 and returns a boolean indicating whether there are more integers in range
+RangeSeq.prototype.next = function() {
+  this.currentInt++;
+  if (this.currentInt >= this.end) { // if current number >= last number
+    return false; // return false, no more integers exist in range
+  }
+  return true; // otherwise return true, more integers exist in range
+};
+
+// current() returns the current integer in the range.
+RangeSeq.prototype.current = function() {
+  return this.currentInt;
+};
   
 logFive(new ArraySeq([1, 2, 3, 4, 5, 6, 7, 8])); // prints 1, 2, 3, 4, 5
 logFive(new ArraySeq([1, 8])); // prints 1, 8
+logFive(new RangeSeq(100, 1000)); // prints 100, 101, 102, 103, 104
+
