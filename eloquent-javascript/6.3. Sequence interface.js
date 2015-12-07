@@ -17,6 +17,7 @@ function logFive(sequence) {
   for (var i = 0; i < 5; i++) { // for first 5 elements
     if (!sequence.next()) { // (useful when sequence has fewer than 5 elements)
       break;
+    }
     console.log(sequence.current()); // otherwise print current element
   }
 }
