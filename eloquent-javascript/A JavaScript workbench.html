@@ -1,0 +1,57 @@
+<!-- A JavaScript workbench
+
+Build an interface that allows people to type and run pieces of JavaScript code.
+
+Put a button next to a <textarea> field, which, when pressed, uses the Function constructor 
+we saw in Chapter 10 to wrap the text in a function and call it. Convert the return value 
+of the function, or any error it raised, to a string and display it after the text field. 
+
+Hints: Use document.querySelector or document.getElementById to get access to the elements 
+defined in your HTML. An event handler for "click" or "mousedown" events on the button can 
+get the value property of the text field and call new Function on it.
+
+Make sure you wrap both the call to new Function and the call to its result in a try block 
+so that you can catch exceptions that it produces. In this case, we really don’t know what 
+type of exception we are looking for, so catch everything.
+
+The textContent property of the output element can be used to fill it with a string message. 
+Or, if you want to keep the old content around, create a new text node using 
+document.createTextNode and append it to the element. Remember to add a newline character 
+to the end so that not all output appears on a single line. -->
+
+<textarea id="code">return "hi";</textarea>
+<button id="button">Run</button>
+<pre id="output"></pre>
+
+<script>
+  document.getElementById('button').addEventListener('click', function() {
+    var code = document.getElementById('code').value;  
+    var output = document.getElementById('output');
+    try {  
+      var func = new Function(code);
+      var result = func();
+      output.textContent = String(result);
+    } catch(err) {
+      output.textContent = String(err);
+    }
+  });
+</script>
+
+
+<!-- Eloquent JavaScript answer: -->
+<textarea id="code">return "hi";</textarea>
+<button id="button">Run</button>
+<pre id="output"></pre>
+
+<script>
+  document.querySelector("#button").addEventListener("click", function() {
+    var code = document.querySelector("#code").value;
+    var outputNode = document.querySelector("#output");
+    try {
+      var result = new Function(code)();
+      outputNode.innerText = String(result);
+    } catch (e) {
+      outputNode.innerText = "Error: " + e;
+    }
+  });
+</script>
