@@ -1,4 +1,4 @@
-/* Tackbot Challenge 1
+/* Tackbot challenge 1
 
 In Thumbtack, users are able to rate Pros based on their experience working with them. Each rating is an 
 integer ranging from 1 to 5, and all ratings are averaged to produce a single number rating for any given 
