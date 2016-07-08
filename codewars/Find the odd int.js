@@ -48,3 +48,13 @@ function findOdd(A) {
 		}
 	}
 }
+
+// Revision 2: Use bitwise XOR operator instead of for loops
+
+function findOdd(A) {
+	integer = 0;
+	A.forEach(function(int) {
+		integer ^= int;
+	});
+	return integer;
+}
