@@ -1,79 +1,79 @@
 <!-- 13.3. The cat's hat
-
-<p style="text-align: center">
-  <img src="img/cat.png" style="position: relative">
-</p>
-<script>
-  var cat = document.querySelector("img");
-  var angle = 0, lastTime = null;
-  function animate(time) {
-    if (lastTime != null)
-      angle += (time - lastTime) * 0.001;
-    lastTime = time;
-    cat.style.top = (Math.sin(angle) * 20) + "px";
-    cat.style.left = (Math.cos(angle) * 200) + "px";
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-</script>
-
-Extend the cat animation defined above so that both the cat and his hat orbit at opposite sides of the ellipse.
-
-Or make the hat circle around the cat. Or alter the animation in some other interesting way.
-
-To make positioning multiple objects easier, it is probably a good idea to switch to absolute positioning. 
-This means that top and left are counted relative to the top left of the document. To avoid using negative
-coordinates, you can simply add a fixed number of pixels to the position values. -->
+ <p style="text-align: center">
+ <img src="img/cat.png" style="position: relative">
+ </p>
+ <script>
+ var cat = document.querySelector("img");
+ var angle = 0, lastTime = null;
+ function animate(time) {
+ if (lastTime != null)
+ angle += (time - lastTime) * 0.001;
+ lastTime = time;
+ cat.style.top = (Math.sin(angle) * 20) + "px";
+ cat.style.left = (Math.cos(angle) * 200) + "px";
+ requestAnimationFrame(animate);
+ }
+ requestAnimationFrame(animate);
+ </script>
+ Extend the cat animation defined above so that both the cat and his hat orbit at opposite sides of the ellipse.
+ Or make the hat circle around the cat. Or alter the animation in some other interesting way.
+ To make positioning multiple objects easier, it is probably a good idea to switch to absolute positioning.
+ This means that top and left are counted relative to the top left of the document. To avoid using negative
+ coordinates, you can simply add a fixed number of pixels to the position values. -->
 
 <img src="http://eloquentjavascript.net/img/cat.png" id="cat" style="position: absolute">
 <img src="http://eloquentjavascript.net/img/hat.png" id="hat" style="position: absolute">
-
-<!-- Where both the cat and his hat orbit at opposite sides of the ellipse -->
-<script>
-  var cat = document.querySelector("#cat"),
-      hat = document.querySelector("#hat"),
-      angleCat = 0, 
-      angleHat = Math.PI, // sets hat opposite cat
-      lastTime = null;
-
-  function animate(time) {
-    if (lastTime != null) {
-      angleCat += (time - lastTime) * 0.001;
-      angleHat += (time - lastTime) * 0.001;
-    }
-    lastTime = time; 
-
-    cat.style.top = (200 + (Math.sin(angleCat) * 200)) + "px";
-    cat.style.left = (400 + (Math.cos(angleCat) * 400)) + "px"; 
-    hat.style.top = (200 + (Math.sin(angleHat) * 200)) + "px"; 
-    hat.style.left = (400 + (Math.cos(angleHat) * 400)) + "px"; 
-
-    requestAnimationFrame(animate); // continues animation
-  }
-
-  requestAnimationFrame(animate); // begins animation
-</script> 
-
-
+        
 <!-- Eloquent JavaScript answer: -->
 <script>
-  var cat = document.querySelector("#cat");
-  var hat = document.querySelector("#hat");
-
-  var angle = 0, lastTime = null;
-  function animate(time) {
-    if (lastTime != null)
-      angle += (time - lastTime) * 0.0015;
-    lastTime = time;
-
-    cat.style.top = (Math.sin(angle) * 50 + 80) + "px";
-    cat.style.left = (Math.cos(angle) * 200 + 230) + "px";
-    // By adding π to the angle, the hat ends up half a circle ahead of the cat
-    var hatAngle = angle + Math.PI;
-    hat.style.top = (Math.sin(hatAngle) * 50 + 80) + "px";
-    hat.style.left = (Math.cos(hatAngle) * 200 + 230) + "px";
+    var cat = document.querySelector("#cat");
+    var hat = document.querySelector("#hat");
+    var angle = 0;
+    var lastTime = null;
+    
+    function animate(time)
+    {
+        var hatAngle;
+        if (lastTime != null)
+        {
+            angle += (time - lastTime) * 0.0015;
+            //By offsetting and multiplying hat angle, you can change the initial position, and speed and direction of rotation.
+            hatAngle = -5 * angle + Math.PI;
+        }
+        lastTime = time;
+        
+        //If you offset the hat by the position of the cat, you can then define a rotation around the cat.
+        //Copying the style from cat to hat must be done before appending the px suffix,
+        //otherwise it is a string and you can't do math with it.
+        //Since the images are positioned by their top left, rather than their center point,
+        //rotating about the center is a bit of a pain.
+        
+        //Set the cat, as per normal.
+        var catTop = (Math.sin(angle) * 100 + 200);
+        var catLeft = (Math.cos(angle) * 100 + 200);
+        
+        //Determine the center point of the cat image.  This will be the point that the hat rotates about
+        var hatPivotX = catLeft + cat.width/2.0;
+        var hatPivotY = catTop + cat.height/2.0;
+        
+        //Now determine where the center point of the hat should be.  It will trace a circle of radius hatRadius
+        //around the center point of the cat.
+        var hatRadius = 90;
+        var hatCenterX = hatPivotX + Math.cos(hatAngle) * hatRadius;
+        var hatCenterY = hatPivotY + Math.sin(hatAngle) * hatRadius; //Can use two separate hat radii if you want an ellipse
+        
+        //Now, based on the center point of the hat, determine the top left corner of the hat, based on its size.
+        var hatLeft = hatCenterX - hat.width/2.0;
+        var hatTop = hatCenterY - hat.height/2.0;
+        
+        //Finally, assign these locations to the actual document objects.    
+        cat.style.top = catTop + "px";
+        cat.style.left = catLeft + "px";	
+        hat.style.top = hatTop + "px";
+        hat.style.left = hatLeft + "px";
+        
+        requestAnimationFrame(animate);
+    }
 
     requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
-</script> 
+</script>
